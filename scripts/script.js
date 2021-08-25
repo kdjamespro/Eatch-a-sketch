@@ -4,6 +4,7 @@ const sliderLabel = document.querySelector('#slider-label');
 const eraserButton = document.querySelector('#eraser');
 const colorButton = document.querySelector('#color');
 const rainbowButton = document.querySelector('#rainbow');
+const viewGrid = document.querySelector('#view');
 
 let eraser = false;
 let rainbow = false;
@@ -96,6 +97,17 @@ clear.addEventListener('click', () => {
         }
     }
 });
+
+viewGrid.addEventListener('click', () => {
+    let drawingTiles = document.querySelectorAll('.drawing-boxes');
+    if(!drawingTiles.length == 0)
+    {
+        for(i = 0; i < drawingTiles.length; i++)
+        {
+            drawingTiles[i].classList.toggle('with-grid');
+        }
+    }
+})
 
 
 slider.addEventListener('change', () =>{

@@ -108,11 +108,11 @@ input[type=color]::-webkit-color-swatch-wrapper {
     width: 600px;
     display: grid;
     grid-auto-rows: 1fr;
-    grid-gap: 1px;
+    border: black solid 1px;
 }
 
-.drawing-boxes{
-    background: white;
+
+.with-grid{
     border: var(--gray) solid 1px;
 }
 
@@ -150,6 +150,10 @@ input[type=color]::-webkit-color-swatch-wrapper {
     .menu{
         font-size: 12px;
         padding: 0.5rem;
+    }
+
+    #clear{
+        grid-column: 1 / -1;
     }
 
     .drawing-board{

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-a-sketch</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="images/icon.png">
     <script src="scripts/script.js" defer></script>
 </head>
 <body>
@@ -18,10 +19,11 @@
             <button class="menu choice selected" id="color">Color Mode</button>
             <button class="menu choice active" id="rainbow">Rainbow Mode</button>
             <button class="menu choice" id="eraser">Eraser</button>
+            <button class="menu choice" id="view">View/Hide Grid</button>
             <button class="menu" id="clear">Clear Grid</button>
             <div class="menu-container">
                 <label for="grid-slider" id="slider-label">16 x 16</label>
-                <input type="range" min="1" max="100" value="16" class="slider" id="grid-slider">
+                <input type="range" min="1" max="64" value="16" class="slider" id="grid-slider">
             </div>
         </div>
 
