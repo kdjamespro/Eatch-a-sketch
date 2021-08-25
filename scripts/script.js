@@ -1,7 +1,12 @@
 const drawingBoard = document.querySelector('.drawing-board');
-const clear = document.querySelector('.clear');
+const clear = document.querySelector('#clear');
+const sliderLabel = document.querySelector('#slider-label');
+const eraserButton = document.querySelector('#eraser');
+const colorButton = document.querySelector('#color');
+const rainbowButton = document.querySelector('#rainbow');
 
-let drag = false;
+let eraser = false;
+let rainbow = false;
 let color = document.querySelector('#color-picker');
 let slider = document.querySelector('#grid-slider');
 
@@ -12,9 +17,7 @@ function drawBoard(size)
     {
         let tile = document.createElement('div');
         tile.classList.toggle('drawing-boxes');
-        tile.addEventListener('mousedown', (event) => fillTiles(event)
-        );
-        tile.addEventListener('mouseover', (event) => fillTiles(event));
+        tile.addEventListener('mousemove', (event) => fillTiles(event));
         drawingBoard.appendChild(tile);
     }
 }
@@ -26,46 +29,82 @@ function setSize(size)
 
 function deleteBoard()
 {
-    let tiles = document.querySelector('.drawing-board').childNodes;
-    for(i = 0; tiles.length; i++)
+    while(drawingBoard.firstChild)
     {
-        tiles[i].parentNode.removeChild(tiles[i]);
+        drawingBoard.removeChild(drawingBoard.lastChild);
     }
 }
 
 function fillTiles(event)
 {
-    if(drag)
+    let color; 
+    if(eraser)
     {
-        let color = document.querySelector('#color-picker').value;
-        event.target.style.background = color;
+        color = 'white';
     }
+    else if(rainbow)
+    {
+        color = rainbowGenerator();
+    }
+    else
+    {
+        color = document.querySelector('#color-picker').value;
+    }
+    event.target.style.background = color;
 }
 
-drawingBoard.addEventListener('mousedown', (event) =>{
-    drag = true;
-    fillTiles(event)
+function rainbowGenerator()
+{
+    let r = 0 + Math.floor(Math.random() * (255 + 1));
+    let g = 0 + Math.floor(Math.random() * (255 + 1));
+    let b = 0 + Math.floor(Math.random() * (255 + 1));
+    return `rgb(${r},${g},${b})`;
+}
+
+colorButton.addEventListener('click', () => {
+    colorButton.classList.add('selected');
+    rainbowButton.classList.remove('selected');
+    eraserButton.classList.remove('selected');
+    eraser = false;
+    rainbow = false;
 });
 
-drawingBoard.addEventListener('mouseup', () =>{
-    drag = false;
-    console.log(drag)
+eraserButton.addEventListener('click', () => {
+    eraserButton.classList.add('selected');
+    rainbowButton.classList.remove('selected');
+    colorButton.classList.remove('selected');
+    eraser = true;
+    rainbow = false;
 });
+
+rainbowButton.addEventListener('click', () => {
+    rainbowButton.classList.add('selected');
+    eraserButton.classList.remove('selected');
+    colorButton.classList.remove('selected');
+    rainbow = true;
+    eraser = false;
+})
+
 
 clear.addEventListener('click', () => {
     let drawingTiles = document.querySelectorAll('.drawing-boxes');
     if(!drawingTiles.length == 0)
     {
-        for(i = 0; drawingTiles.length; i++)
+        for(i = 0; i < drawingTiles.length; i++)
         {
             drawingTiles[i].style.background = 'white';
         }
     }
 });
 
+
 slider.addEventListener('change', () =>{
+    let sliderVal = parseInt(slider.value);
+    sliderLabel.textContent = "";
+    sliderLabel.textContent = `${sliderVal} X ${sliderVal}`;
+
     deleteBoard();
-    drawBoard(parseInt(slider.value));
+    drawBoard(sliderVal);
 })
 
 drawBoard(parseInt(slider.value));

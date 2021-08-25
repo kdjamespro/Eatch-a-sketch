@@ -17,6 +17,10 @@ html, body{
     background: white;
 }
 
+label{
+    text-align: center;
+}
+
 button{
     font-size: 1rem;
     border: none;
@@ -29,6 +33,7 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
 }
 
 .settings{
@@ -57,6 +62,13 @@ input[type=color]::-webkit-color-swatch-wrapper {
     padding: 0;
 }
 
+.menu-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 
 .settings label{
     font-size: 20px;
@@ -66,18 +78,25 @@ input[type=color]::-webkit-color-swatch-wrapper {
 }
 
 .menu{
-    margin-top: 0.5rem;
+    margin: 0.5rem auto;
     width: 100%;
     background: var(--torquise);
     padding: 1rem;
     border-radius: 10px;
     box-shadow: 0 6px #45A29E;
     position: relative;
+    transition: all 0.2s ease-out;
 }
 
 .menu:hover{
     box-shadow: 0 8px #45A29E;
     top: -2px;
+}
+
+.selected{  
+    color: white;
+    background: #00292A;
+    box-shadow: 0 6px #ffffff;
 }
 
 #grid-slider{
@@ -97,3 +116,54 @@ input[type=color]::-webkit-color-swatch-wrapper {
     border: var(--gray) solid 1px;
 }
 
+@media screen and (max-width: 750px){
+
+    html{
+        width: 100%;
+        height: auto;
+    }
+
+    .container{
+        flex-direction: column-reverse;
+    }
+
+    #color-picker{
+        height: 50px;
+        width: 50px;
+    }
+
+    .settings{
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .settings label{
+        font-size: 12px;
+    }
+
+    .menu-container{
+        grid-column: 1 / -1;
+    }
+
+
+    .menu{
+        font-size: 12px;
+        padding: 0.5rem;
+    }
+
+    .drawing-board{
+        height: 300px;
+        width: 300px;
+    }
+
+
+}
+
+@media screen and (max-width: 300px)
+{
+    .drawing-board{
+        height: 250px;
+        width: 250px;
+    }
+}
